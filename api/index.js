@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs"); //npm install bcryptjs
 const app = express();
 const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 const cookieParser = require("cookie-parser"); //npm install cookie-parser
+const mongoose = require("mongoose"); //npm install mongoose
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajkjaskskelelkj";
@@ -36,7 +37,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (res, req) => {
   const { username, password } = req.body;
-  const userDoc = await User.findOne({ username: username });
+  const userDoc = await User.findOne({ username });
   // check a password
   const passOk = bcrypt.compareSync(password, userDoc.password);
 

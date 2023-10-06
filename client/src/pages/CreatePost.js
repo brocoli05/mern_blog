@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // apply theme
 import { Navigate } from "react-router-dom";
+import Editor from "../Editor";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
