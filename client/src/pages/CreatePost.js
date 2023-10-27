@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // apply theme
+import ReactQuill from "react-quill"; // text editor
+import "react-quill/dist/quill.snow.css"; // apply theme (ReactQuill)
 import { Navigate } from "react-router-dom";
-import Editor from "../Editor";
+import Editor from "../Editor"; // text editor modules and formats
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -17,6 +17,7 @@ export default function CreatePost() {
     data.set("summary", summary);
     data.set("content", content);
     data.set("file", files[0]);
+    // console.log(files);
     ev.preventDefault();
 
     const response = await fetch("http://localhost:4000/post", {
@@ -48,7 +49,7 @@ export default function CreatePost() {
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
-      <input type="file" onChange={(ev) => setFiles(ev.target.value)} />
+      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
       <Editor value={content} onChange={setContent} />
       <button style={{ marginTop: "5px" }}>Create post</button>
     </form>

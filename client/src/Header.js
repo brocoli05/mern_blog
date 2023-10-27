@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 export default function Header() {
-  const { setUserInfo, userInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetch("http://localhost:4000/profile", {
@@ -13,16 +13,25 @@ export default function Header() {
         setUserInfo(userInfo);
       });
     });
-  });
+  }, []);
 
   function logout() {
     fetch("http://localhost:4000/logout", {
       credentials: "include",
       method: "POST",
-    });
-    setUserInfo(null);
+    })
+      // setUserInfo(null);
+      .then((response) => {
+        if (response.ok) {
+          setUserInfo(null);
+        } else {
+          console.error("Logout failed");
+        }
+      })
+      .catch((err) => {
+        console.error("Error during Logout:", err);
+      });
   }
-
   const username = userInfo?.username;
 
   return (
