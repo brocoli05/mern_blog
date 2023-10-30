@@ -1,1 +1,1 @@
-# mern_blog
+# Blog Application with MERN stack

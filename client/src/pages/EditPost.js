@@ -27,11 +27,12 @@ export default function EditPost() {
     data.set("summary", summary);
     data.set("content", content);
     data.set("id", id);
+    //files can be empty
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
     const response = await fetch("http://localhost:4000/post", {
-      method: "PUT",
+      method: "PUT", // update the post
       body: data,
       credentials: "include",
     });
